@@ -1,0 +1,192 @@
+.separator ','
+
+/* Setup Commands */
+/* Stock Quotes Table */
+
+drop table quotes;
+CREATE TABLE quotes (
+  symbol text NOT NULL,
+  date text NOT NULL,
+  price_open real NOT NULL,
+  price_high real NOT NULL,
+  price_low real NOT NULL,
+  price_close real NOT NULL,
+  volume integer NOT NULL,
+  price_adj_close real NOT NULL
+);
+CREATE UNIQUE INDEX symdate_idx ON quotes (symbol,date);
+CREATE        INDEX date_idx    ON quotes (date);
+CREATE        INDEX symbol_idx  ON quotes (symbol);
+
+/* Market Statistical Data Table */
+--drop table market_stats;
+--CREATE TABLE market_stats (
+--  market text NOT NULL,
+--  date text NOT NULL,
+--  adv_issues integer NOT NULL,
+--  dec_issues integer NOT NULL,
+--  unch_issues integer NOT NULL,
+--  adv_volume integer NOT NULL,
+--  dec_volume integer NOT NULL,
+--  unch_volume integer NOT NULL,
+--  new_highs integer NOT NULL,
+--  new_lows integer NOT NULL
+--);
+--CREATE UNIQUE INDEX stats_market_date_idx  ON market_stats (market,date);
+--CREATE        INDEX stats_date_idx                ON market_stats (date);
+--CREATE        INDEX stats_market_idx              ON market_stats (market);
+
+/* make NASDAQ new high new low table */
+--CREATE VIEW IF NOT EXISTS nahl AS SELECT date, (new_highs - new_lows) FROM market_stats WHERE market = 'NASDAQ';
+
+
+/* Import Data */
+/* Stock Quotes */
+.import csv_files/AGG.csv quotes
+.import csv_files/BIL.csv quotes
+.import csv_files/BLV.csv quotes
+.import csv_files/BSV.csv quotes
+.import csv_files/BTTRX.csv quotes
+.import csv_files/DBA.csv quotes
+.import csv_files/DBC.csv quotes
+.import csv_files/DBO.csv quotes
+.import csv_files/ECH.csv quotes
+.import csv_files/EEM.csv quotes
+.import csv_files/EFA.csv quotes
+.import csv_files/EPP.csv quotes
+.import csv_files/EWA.csv quotes
+.import csv_files/EWD.csv quotes
+.import csv_files/EWG.csv quotes
+.import csv_files/EWH.csv quotes
+.import csv_files/EWI.csv quotes
+.import csv_files/EWJ.csv quotes
+.import csv_files/EWK.csv quotes
+.import csv_files/EWL.csv quotes
+.import csv_files/EWM.csv quotes
+.import csv_files/EWN.csv quotes
+.import csv_files/EWO.csv quotes
+.import csv_files/EWP.csv quotes
+.import csv_files/EWQ.csv quotes
+.import csv_files/EWS.csv quotes
+.import csv_files/EWT.csv quotes
+.import csv_files/EWU.csv quotes
+.import csv_files/EWW.csv quotes
+.import csv_files/EWY.csv quotes
+.import csv_files/EWZ.csv quotes
+.import csv_files/EZA.csv quotes
+.import csv_files/FEZ.csv quotes
+.import csv_files/FIEUX.csv quotes
+.import csv_files/FXI.csv quotes
+.import csv_files/GDX.csv quotes
+.import csv_files/GLD.csv quotes
+.import csv_files/GMF.csv quotes
+.import csv_files/GML.csv quotes
+.import csv_files/GSG.csv quotes
+.import csv_files/ICF.csv quotes
+.import csv_files/IDX.csv quotes
+.import csv_files/IEF.csv quotes
+.import csv_files/IEV.csv quotes
+.import csv_files/ILF.csv quotes
+.import csv_files/IOO.csv quotes
+.import csv_files/IPE.csv quotes
+.import csv_files/IVW.csv quotes
+.import csv_files/IWB.csv quotes
+.import csv_files/IWD.csv quotes
+.import csv_files/IWF.csv quotes
+.import csv_files/IWM.csv quotes
+.import csv_files/IWN.csv quotes
+.import csv_files/IWO.csv quotes
+.import csv_files/IWP.csv quotes
+.import csv_files/IWR.csv quotes
+.import csv_files/IWV.csv quotes
+.import csv_files/IXC.csv quotes
+.import csv_files/IXJ.csv quotes
+.import csv_files/IXP.csv quotes
+.import csv_files/IYR.csv quotes
+.import csv_files/LAQ.csv quotes
+.import csv_files/OIL.csv quotes
+.import csv_files/PBW.csv quotes
+.import csv_files/PGJ.csv quotes
+.import csv_files/PHYS.csv quotes
+.import csv_files/PSLV.csv quotes
+.import csv_files/PZD.csv quotes
+.import csv_files/QQQQ.csv quotes
+.import csv_files/RWR.csv quotes
+.import csv_files/RSP.csv quotes
+.import csv_files/RSX.csv quotes
+.import csv_files/SASPX.csv quotes
+.import csv_files/SHV.csv quotes
+.import csv_files/SLV.csv quotes
+.import csv_files/SPY.csv quotes
+.import csv_files/SWPIX.csv quotes
+.import csv_files/SWSMX.csv quotes
+.import csv_files/TIP.csv quotes
+.import csv_files/TLO.csv quotes
+.import csv_files/TLT.csv quotes
+.import csv_files/THD.csv quotes
+.import csv_files/UNG.csv quotes
+.import csv_files/USL.csv quotes
+.import csv_files/USO.csv quotes
+.import csv_files/VEA.csv quotes
+.import csv_files/VNQ.csv quotes
+.import csv_files/VWO.csv quotes
+.import csv_files/XLB.csv quotes
+.import csv_files/XLE.csv quotes
+.import csv_files/XLF.csv quotes
+.import csv_files/XLI.csv quotes
+.import csv_files/XLK.csv quotes
+.import csv_files/XLP.csv quotes
+.import csv_files/XLU.csv quotes
+.import csv_files/XLV.csv quotes
+.import csv_files/XLY.csv quotes
+/* currency ETFs */
+/*   CurrencyShares */
+.import csv_files/FXA.csv quotes
+.import csv_files/FXB.csv quotes
+.import csv_files/FXC.csv quotes
+.import csv_files/FXE.csv quotes
+.import csv_files/FXY.csv quotes
+.import csv_files/FXM.csv quotes
+.import csv_files/FXS.csv quotes
+.import csv_files/FXF.csv quotes
+/*   WisdomTree */
+.import csv_files/BZF.csv quotes
+.import csv_files/CYB.csv quotes
+.import csv_files/CEW.csv quotes
+.import csv_files/EU.csv quotes
+.import csv_files/ICN.csv quotes
+.import csv_files/JYF.csv quotes
+.import csv_files/BNZ.csv quotes
+.import csv_files/SZR.csv quotes
+.import csv_files/USY.csv quotes
+/* Biotech */
+.import csv_files/BBH.csv quotes
+/* Pharma */
+.import csv_files/PPH.csv quotes
+/* Individual Stocks */
+.import csv_files/AAPL.csv quotes
+.import csv_files/ABX.csv quotes
+.import csv_files/COP.csv quotes
+.import csv_files/GOOG.csv quotes
+.import csv_files/IBM.csv quotes
+.import csv_files/XOM.csv quotes
+/* Short */
+.import csv_files/SH.csv quotes
+/* Levereged */
+.import csv_files/BGU.csv quotes
+.import csv_files/TNA.csv quotes
+.import csv_files/QLD.csv quotes
+.import csv_files/UPRO.csv quotes
+/* Indices */
+.import csv_files/^GSPC.csv quotes
+.import csv_files/^NYA.csv quotes
+.import csv_files/^DJI.csv quotes
+.import csv_files/^IXIC.csv quotes
+.import csv_files/^NDX.csv quotes
+.import csv_files/^TNX.csv quotes
+.import csv_files/^RUI.csv quotes
+.import csv_files/^RUT.csv quotes
+.import csv_files/^VIX.csv quotes
+
+/* Cleanup Commands */
+VACUUM;
