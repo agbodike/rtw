@@ -188,7 +188,7 @@ puts ''
 puts ''
 
 final_quote = Quote.first(:symbol=>old_symbol, :order=>[:date.desc], :offset=>options.start)
-if rtw_array.last[:buy] != '$': rtw_array << {:date => final_quote.date, :offset => options.start, :sell_price => final_quote.price_adj_close, :sell => old_symbol}
+if (rtw_array.last[:buy] != '$') then rtw_array << {:date => final_quote.date, :offset => options.start, :sell_price => final_quote.price_adj_close, :sell => old_symbol}
 else rtw_array << {:date => final_quote.date, :offset => options.start, :sell_price => 1.0, :sell => '$'}
 end
 len = rtw_array.length
